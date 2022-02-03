@@ -9,10 +9,6 @@ public class Simulator {
         int num = info.getInfo();
         GeneratorController sim = new GeneratorController(num);
         sim.generate();
-//        UseCase u = new UseCase(num);
-//        List l = u.createRandom(u.uniqueSize);
-//        System.out.println(l);
-//        System.out.println(u.uniqueSize);
 
 
     }

@@ -12,12 +12,14 @@ public class UseCase {
     public List<String> random = new ArrayList<>();
     double coverage;
     public List<String> unique;
+    public final int size;
 
     public UseCase(int num){
 
         this.num = num * 3;
         this.sequence = createTemplate();
         this.unique = createUnique();
+        this.size = createUnique().size();
     }
 
     public void setDeciNum(int deciNum) {
@@ -105,36 +107,36 @@ public class UseCase {
         return result;
     }
 
-    public List<String> createRandom(int simNum) {
-        List<String> result = new ArrayList<>();
-        List<String> n = new ArrayList<String>();
-        n.add("A");
-        n.add("T");
-        n.add("C");
-        n.add("G");
-        List<String> k = new ArrayList<String>();
-        k.add("T");
-        k.add("G");
-
-        for (int i = 0; i < simNum; i++) {
-            int index = 0;
-            int max = this.sequence.length();
-            StringBuilder sequence = new StringBuilder();
-            while (index < max) {
-                if (stringAt(this.sequence, index).equals("N")) {
-                    sequence.append(random(n));
-                    index += 1;
-                }
-                else if (stringAt(this.sequence, index).equals("K")) {
-                    sequence.append(random(k));
-                    index += 1;
-                }
-            }
-            result.add(String.valueOf(sequence));
-        }
-
-        return result;
-    }
+//    public List<String> createRandom(int simNum) {
+//        List<String> result = new ArrayList<>();
+//        List<String> n = new ArrayList<String>();
+//        n.add("A");
+//        n.add("T");
+//        n.add("C");
+//        n.add("G");
+//        List<String> k = new ArrayList<String>();
+//        k.add("T");
+//        k.add("G");
+//
+//        for (int i = 0; i < simNum; i++) {
+//            int index = 0;
+//            int max = this.sequence.length();
+//            StringBuilder sequence = new StringBuilder();
+//            while (index < max) {
+//                if (stringAt(this.sequence, index).equals("N")) {
+//                    sequence.append(random(n));
+//                    index += 1;
+//                }
+//                else if (stringAt(this.sequence, index).equals("K")) {
+//                    sequence.append(random(k));
+//                    index += 1;
+//                }
+//            }
+//            result.add(String.valueOf(sequence));
+//        }
+//
+//        return result;
+//    }
 
     public String oneRandom() {
         List<String> n = new ArrayList<String>();
@@ -185,13 +187,12 @@ public class UseCase {
     }
 
     public double calCoverage() {
-        int num = createUnique().size() - this.unique.size();
-        int max = createUnique().size();
+        int max = this.size;
         String seq = oneRandom();
         if (this.unique.size() != 0) {
             if (this.unique.contains(seq)) {
                 this.unique.remove(seq);
-                num = createUnique().size() - this.unique.size();
+                int num = this.size - this.unique.size();
                 this.coverage = round(( (double) num / max) * 100, this.deciNum);
             }
         }

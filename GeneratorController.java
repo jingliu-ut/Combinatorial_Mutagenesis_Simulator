@@ -44,7 +44,6 @@ public class GeneratorController implements SystemInOut{
         int simNum = 0;
         double simCoverage = 0;
         while (simCoverage < coverage) {
-
             simCoverage = useCase.calCoverage();
             simNum += 1;
             sendOutput(String.valueOf(simNum));
