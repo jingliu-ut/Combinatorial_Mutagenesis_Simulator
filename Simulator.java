@@ -5,12 +5,13 @@ import java.util.List;
 
 public class Simulator {
     public static void main(String[] args) throws IOException {
-        GetInfoController info = new GetInfoController();
-        int num = info.getInfo();
-        GeneratorController sim = new GeneratorController(num);
-        sim.generate();
-
-
+        int num = 1;
+        double coverage = 80;
+        String type = "aa"; //"dna" or "aa"
+        int replicateNum = 1;
+        GeneratorController sim = new GeneratorController(num, coverage, type, replicateNum);
+        int simNum = sim.generate();
+        System.out.println(simNum);
     }
 
 

@@ -30,5 +30,4 @@ public class GetInfoController implements SystemInOut{
         return num;
     }
 
-    public void writeUniqueSequence(){}
 }

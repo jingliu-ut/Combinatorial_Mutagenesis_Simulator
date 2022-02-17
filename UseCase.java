@@ -1,25 +1,94 @@
 import java.io.*;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class UseCase {
     private final int num;
     public String sequence;
     public int deciNum;
-    public List<String> random = new ArrayList<>();
+    public List<String> randomDNA = new ArrayList<>();
+    public List<String> randomAA = new ArrayList<>();
     double coverage;
-    public List<String> unique;
-    public final int size;
+    public List<String> uniqueDNA;
+    public List<String> uniqueAA;
+    public final int DNAsize;
+    public final int AAsize;
+    public final Map<String, String> aa = new HashMap<>();
+    private final List<String> aaList = Arrays.asList("F", "L", "I", "M", "V", "S", "P", "T", "A", "Y", "*", "H", "Q", "N", "K", "D",
+            "E", "C", "W", "R", "G");
 
     public UseCase(int num){
-
-        this.num = num * 3;
+        this.num = num;
         this.sequence = createTemplate();
-        this.unique = createUnique();
-        this.size = createUnique().size();
+        this.uniqueDNA = createUniqueDNA();
+        this.DNAsize = createUniqueDNA().size();
+        this.uniqueAA = createUniqueAA();
+        this.AAsize = createUniqueAA().size();
+        this.aa.put("TTT", "F");
+        this.aa.put("TTC", "F");
+        this.aa.put("TTA", "L");
+        this.aa.put("TTG", "L");
+        this.aa.put("CTT", "L");
+        this.aa.put("CTC", "L");
+        this.aa.put("CTA", "L");
+        this.aa.put("CTG", "L");
+        this.aa.put("ATT", "I");
+        this.aa.put("ATC", "I");
+        this.aa.put("ATA", "I");
+        this.aa.put("ATG", "M");
+        this.aa.put("GTT", "V");
+        this.aa.put("GTC", "V");
+        this.aa.put("GTA", "V");
+        this.aa.put("GTG", "V");
+        this.aa.put("TCT", "S");
+        this.aa.put("TCC", "S");
+        this.aa.put("TCA", "S");
+        this.aa.put("TCG", "S");
+        this.aa.put("CCT", "P");
+        this.aa.put("CCC", "P");
+        this.aa.put("CCA", "P");
+        this.aa.put("CCG", "P");
+        this.aa.put("ACT", "T");
+        this.aa.put("ACC", "T");
+        this.aa.put("ACA", "T");
+        this.aa.put("ACG", "T");
+        this.aa.put("GCT", "A");
+        this.aa.put("GCC", "A");
+        this.aa.put("GCA", "A");
+        this.aa.put("GCG", "A");
+        this.aa.put("TAT", "Y");
+        this.aa.put("TAC", "Y");
+        this.aa.put("TAA", "*");
+        this.aa.put("TAG", "*");
+        this.aa.put("CAT", "H");
+        this.aa.put("CAC", "H");
+        this.aa.put("CAA", "Q");
+        this.aa.put("CAG", "Q");
+        this.aa.put("AAT", "N");
+        this.aa.put("AAC", "N");
+        this.aa.put("AAA", "K");
+        this.aa.put("AAG", "K");
+        this.aa.put("GAT", "D");
+        this.aa.put("GAC", "D");
+        this.aa.put("GAA", "E");
+        this.aa.put("GAG", "E");
+        this.aa.put("TGT", "C");
+        this.aa.put("TGC", "C");
+        this.aa.put("TGA", "*");
+        this.aa.put("TGG", "W");
+        this.aa.put("CGT", "R");
+        this.aa.put("CGC", "R");
+        this.aa.put("CGA", "R");
+        this.aa.put("CGG", "R");
+        this.aa.put("AGT", "S");
+        this.aa.put("AGC", "S");
+        this.aa.put("AGA", "R");
+        this.aa.put("AGG", "R");
+        this.aa.put("GGT", "G");
+        this.aa.put("GGC", "G");
+        this.aa.put("GGA", "G");
+        this.aa.put("GGG", "G");
     }
 
     public void setDeciNum(int deciNum) {
@@ -27,9 +96,10 @@ public class UseCase {
     }
 
     public String createTemplate() {
+        int num = this.num * 3;
         int pos = 1;
         StringBuilder tempSequence = new StringBuilder("");
-        while (pos <= this.num) {
+        while (pos <= num) {
             if (!((pos % 3) == 0)) {
                 tempSequence.append("N");
                 pos += 1;
@@ -41,8 +111,31 @@ public class UseCase {
         return tempSequence.toString();
     }
 
+    public List<String> createUniqueAA() {
+        List<String> result = new ArrayList<>();
+        List<String> temp = new ArrayList<>();
+        String sequence = "_".repeat(this.num);
+        for (String aa: aaList) {
+            temp.add(aa + sequence.substring(1));
+        }
+        int index = 1;
+        while (index < sequence.length()) {
+            List<String> temp2 = new ArrayList<>();
+            for (String s : temp) {
+                String pre = s.substring(0, index);
+                String post = s.substring(index + 1);
+                for (String i : aaList) {
+                    temp2.add(pre + i + post);
+                }
+            }
+            temp = temp2;
+            index += 1;
+        }
+        result = temp;
+        return result;
+    }
 
-    public List<String> createUnique() {
+    public List<String> createUniqueDNA() {
         List<String> result = new ArrayList<>();
         List<String> temp = new ArrayList<>();
         List<String> n = new ArrayList<String>();
@@ -107,37 +200,6 @@ public class UseCase {
         return result;
     }
 
-//    public List<String> createRandom(int simNum) {
-//        List<String> result = new ArrayList<>();
-//        List<String> n = new ArrayList<String>();
-//        n.add("A");
-//        n.add("T");
-//        n.add("C");
-//        n.add("G");
-//        List<String> k = new ArrayList<String>();
-//        k.add("T");
-//        k.add("G");
-//
-//        for (int i = 0; i < simNum; i++) {
-//            int index = 0;
-//            int max = this.sequence.length();
-//            StringBuilder sequence = new StringBuilder();
-//            while (index < max) {
-//                if (stringAt(this.sequence, index).equals("N")) {
-//                    sequence.append(random(n));
-//                    index += 1;
-//                }
-//                else if (stringAt(this.sequence, index).equals("K")) {
-//                    sequence.append(random(k));
-//                    index += 1;
-//                }
-//            }
-//            result.add(String.valueOf(sequence));
-//        }
-//
-//        return result;
-//    }
-
     public String oneRandom() {
         List<String> n = new ArrayList<String>();
         n.add("A");
@@ -161,7 +223,8 @@ public class UseCase {
                 index += 1;
             }
         }
-        this.random.add(String.valueOf(sequence));
+        this.randomDNA.add(String.valueOf(sequence));
+        this.randomAA.add(dna2aa(String.valueOf(sequence)));
         return String.valueOf(sequence);
     }
 
@@ -186,39 +249,34 @@ public class UseCase {
         bw.close();
     }
 
-    public double calCoverage() {
-        int max = this.size;
+    public double calDNACoverage() {
         String seq = oneRandom();
-        if (this.unique.size() != 0) {
-            if (this.unique.contains(seq)) {
-                this.unique.remove(seq);
-                int num = this.size - this.unique.size();
-                this.coverage = round(( (double) num / max) * 100, this.deciNum);
+        if (this.uniqueDNA.size() != 0) {
+            if (this.uniqueDNA.contains(seq)) {
+                this.uniqueDNA.remove(seq);
+                int num = this.DNAsize - this.uniqueDNA.size();
+                this.coverage = round(( (double) num / this.DNAsize) * 100, this.deciNum);
             }
         }
         return this.coverage;
     }
 
-//    public double calCoverage() {
-//        List<String> uniSeq = createUnique();
-//        List<String> temp = new ArrayList<>();
-//        int count = 0;
-//        int total = uniSeq.size();
-//        for (String seq: random) {
-//            if (uniSeq.contains(seq)) {
-//                if (!temp.contains(seq)) {
-//                    temp.add(seq);
-//                    count += 1;
-//                }
-//            }
-//        }
-//        return ( (double) count / total) * 100;
-//    }
+    public double calAACoverage() {
+        String seq = oneRandom();
+        String aa = dna2aa(seq);
+        if (this.uniqueAA.size() != 0) {
+            if (this.uniqueAA.contains(aa)) {
+                this.uniqueAA.remove(aa);
+                int num = this.AAsize - this.uniqueAA.size();
+                this.coverage = round(( (double) num / this.AAsize) * 100, this.deciNum);
+            }
+        }
+        return this.coverage;
+    }
 
-
-//    public double getCoverage() {
-//        return calCoverage(random);
-//    }
+    public String dna2aa(String dna) {
+        return this.aa.get(dna);
+    }
 
     public static double round(double value, int places) {
         if (places < 0) throw new IllegalArgumentException();
