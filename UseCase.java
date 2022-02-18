@@ -14,7 +14,7 @@ public class UseCase {
     public List<String> uniqueAA;
     public final int DNAsize;
     public final int AAsize;
-    public final Map<String, String> aa = new HashMap<>();
+    public final Map<String, String> aaMap = new HashMap<>();
     private final List<String> aaList = Arrays.asList("F", "L", "I", "M", "V", "S", "P", "T", "A", "Y", "*", "H", "Q", "N", "K", "D",
             "E", "C", "W", "R", "G");
 
@@ -25,70 +25,70 @@ public class UseCase {
         this.DNAsize = createUniqueDNA().size();
         this.uniqueAA = createUniqueAA();
         this.AAsize = createUniqueAA().size();
-        this.aa.put("TTT", "F");
-        this.aa.put("TTC", "F");
-        this.aa.put("TTA", "L");
-        this.aa.put("TTG", "L");
-        this.aa.put("CTT", "L");
-        this.aa.put("CTC", "L");
-        this.aa.put("CTA", "L");
-        this.aa.put("CTG", "L");
-        this.aa.put("ATT", "I");
-        this.aa.put("ATC", "I");
-        this.aa.put("ATA", "I");
-        this.aa.put("ATG", "M");
-        this.aa.put("GTT", "V");
-        this.aa.put("GTC", "V");
-        this.aa.put("GTA", "V");
-        this.aa.put("GTG", "V");
-        this.aa.put("TCT", "S");
-        this.aa.put("TCC", "S");
-        this.aa.put("TCA", "S");
-        this.aa.put("TCG", "S");
-        this.aa.put("CCT", "P");
-        this.aa.put("CCC", "P");
-        this.aa.put("CCA", "P");
-        this.aa.put("CCG", "P");
-        this.aa.put("ACT", "T");
-        this.aa.put("ACC", "T");
-        this.aa.put("ACA", "T");
-        this.aa.put("ACG", "T");
-        this.aa.put("GCT", "A");
-        this.aa.put("GCC", "A");
-        this.aa.put("GCA", "A");
-        this.aa.put("GCG", "A");
-        this.aa.put("TAT", "Y");
-        this.aa.put("TAC", "Y");
-        this.aa.put("TAA", "*");
-        this.aa.put("TAG", "*");
-        this.aa.put("CAT", "H");
-        this.aa.put("CAC", "H");
-        this.aa.put("CAA", "Q");
-        this.aa.put("CAG", "Q");
-        this.aa.put("AAT", "N");
-        this.aa.put("AAC", "N");
-        this.aa.put("AAA", "K");
-        this.aa.put("AAG", "K");
-        this.aa.put("GAT", "D");
-        this.aa.put("GAC", "D");
-        this.aa.put("GAA", "E");
-        this.aa.put("GAG", "E");
-        this.aa.put("TGT", "C");
-        this.aa.put("TGC", "C");
-        this.aa.put("TGA", "*");
-        this.aa.put("TGG", "W");
-        this.aa.put("CGT", "R");
-        this.aa.put("CGC", "R");
-        this.aa.put("CGA", "R");
-        this.aa.put("CGG", "R");
-        this.aa.put("AGT", "S");
-        this.aa.put("AGC", "S");
-        this.aa.put("AGA", "R");
-        this.aa.put("AGG", "R");
-        this.aa.put("GGT", "G");
-        this.aa.put("GGC", "G");
-        this.aa.put("GGA", "G");
-        this.aa.put("GGG", "G");
+        this.aaMap.put("TTT", "F");
+        this.aaMap.put("TTC", "F");
+        this.aaMap.put("TTA", "L");
+        this.aaMap.put("TTG", "L");
+        this.aaMap.put("CTT", "L");
+        this.aaMap.put("CTC", "L");
+        this.aaMap.put("CTA", "L");
+        this.aaMap.put("CTG", "L");
+        this.aaMap.put("ATT", "I");
+        this.aaMap.put("ATC", "I");
+        this.aaMap.put("ATA", "I");
+        this.aaMap.put("ATG", "M");
+        this.aaMap.put("GTT", "V");
+        this.aaMap.put("GTC", "V");
+        this.aaMap.put("GTA", "V");
+        this.aaMap.put("GTG", "V");
+        this.aaMap.put("TCT", "S");
+        this.aaMap.put("TCC", "S");
+        this.aaMap.put("TCA", "S");
+        this.aaMap.put("TCG", "S");
+        this.aaMap.put("CCT", "P");
+        this.aaMap.put("CCC", "P");
+        this.aaMap.put("CCA", "P");
+        this.aaMap.put("CCG", "P");
+        this.aaMap.put("ACT", "T");
+        this.aaMap.put("ACC", "T");
+        this.aaMap.put("ACA", "T");
+        this.aaMap.put("ACG", "T");
+        this.aaMap.put("GCT", "A");
+        this.aaMap.put("GCC", "A");
+        this.aaMap.put("GCA", "A");
+        this.aaMap.put("GCG", "A");
+        this.aaMap.put("TAT", "Y");
+        this.aaMap.put("TAC", "Y");
+        this.aaMap.put("TAA", "*");
+        this.aaMap.put("TAG", "*");
+        this.aaMap.put("CAT", "H");
+        this.aaMap.put("CAC", "H");
+        this.aaMap.put("CAA", "Q");
+        this.aaMap.put("CAG", "Q");
+        this.aaMap.put("AAT", "N");
+        this.aaMap.put("AAC", "N");
+        this.aaMap.put("AAA", "K");
+        this.aaMap.put("AAG", "K");
+        this.aaMap.put("GAT", "D");
+        this.aaMap.put("GAC", "D");
+        this.aaMap.put("GAA", "E");
+        this.aaMap.put("GAG", "E");
+        this.aaMap.put("TGT", "C");
+        this.aaMap.put("TGC", "C");
+        this.aaMap.put("TGA", "*");
+        this.aaMap.put("TGG", "W");
+        this.aaMap.put("CGT", "R");
+        this.aaMap.put("CGC", "R");
+        this.aaMap.put("CGA", "R");
+        this.aaMap.put("CGG", "R");
+        this.aaMap.put("AGT", "S");
+        this.aaMap.put("AGC", "S");
+        this.aaMap.put("AGA", "R");
+        this.aaMap.put("AGG", "R");
+        this.aaMap.put("GGT", "G");
+        this.aaMap.put("GGC", "G");
+        this.aaMap.put("GGA", "G");
+        this.aaMap.put("GGG", "G");
     }
 
     public void setDeciNum(int deciNum) {
@@ -98,21 +98,20 @@ public class UseCase {
     public String createTemplate() {
         int num = this.num * 3;
         int pos = 1;
-        StringBuilder tempSequence = new StringBuilder("");
+        StringBuilder tempSequence = new StringBuilder();
         while (pos <= num) {
             if (!((pos % 3) == 0)) {
                 tempSequence.append("N");
-                pos += 1;
             } else {
                 tempSequence.append("K");
-                pos += 1;
             }
+            pos += 1;
         }
         return tempSequence.toString();
     }
 
     public List<String> createUniqueAA() {
-        List<String> result = new ArrayList<>();
+        List<String> result;
         List<String> temp = new ArrayList<>();
         String sequence = "_".repeat(this.num);
         for (String aa: aaList) {
@@ -246,6 +245,7 @@ public class UseCase {
             bw.write(sequence);
             bw.newLine();
         }
+        bw.write(String.valueOf(sequences.size()));
         bw.close();
     }
 
@@ -275,7 +275,16 @@ public class UseCase {
     }
 
     public String dna2aa(String dna) {
-        return this.aa.get(dna);
+        StringBuilder seq = new StringBuilder("");
+        int index = 0;
+        while (index < dna.length()) {
+            if ((index % 3) == 0) {
+                String temp = dna.substring(index, index + 3);
+                seq.append(this.aaMap.get(temp));
+            }
+            index += 1;
+        }
+        return String.valueOf(seq);
     }
 
     public static double round(double value, int places) {

@@ -6,7 +6,7 @@ import java.util.List;
 public class Simulator {
     public static void main(String[] args) throws IOException {
         int num = 1;
-        double coverage = 80;
+        double coverage = 100;
         String type = "aa"; //"dna" or "aa"
         int replicateNum = 1;
         GeneratorController sim = new GeneratorController(num, coverage, type, replicateNum);

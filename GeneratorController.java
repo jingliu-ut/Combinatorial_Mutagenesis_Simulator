@@ -49,14 +49,12 @@ public class GeneratorController implements SystemInOut{
             while (simCoverage < this.coverage) {
                 simCoverage = useCase.calDNACoverage();
                 simNum += 1;
-                sendOutput(String.valueOf(simNum));
             }
             this.useCase.writeFile(this.useCase.randomDNA, "randomDNA_" + coverage + "_" + replicateNum);
         } else if (this.type.equals("aa")) {
             while (simCoverage < this.coverage) {
                 simCoverage = useCase.calAACoverage();
                 simNum += 1;
-                sendOutput(String.valueOf(simNum));
             }
             this.useCase.writeFile(this.useCase.randomAA, "randomAA_"  + coverage + "_" + replicateNum);
         }
@@ -64,12 +62,4 @@ public class GeneratorController implements SystemInOut{
         return simNum;
     }
 
-
-    public static double round(double value, int places) {
-        if (places < 0) throw new IllegalArgumentException();
-
-        BigDecimal bd = new BigDecimal(Double.toString(value));
-        bd = bd.setScale(places, RoundingMode.HALF_UP);
-        return bd.doubleValue();
-    }
 }
