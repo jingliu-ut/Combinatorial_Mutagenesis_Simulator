@@ -47,11 +47,13 @@ public class GeneratorController implements SystemInOut{
             while (simCoverage < this.coverage) {
                 simCoverage = useCase.calDNACoverage();
                 simNum += 1;
+                sendOutput("Current coverage: " + simCoverage + "\nCurrent number of random sequences: " + simNum);
             }
             this.useCase.writeFile(this.useCase.randomDNA, this.mutagenesis_scheme + "_randomDNA_DNA_" + coverage +
                     "_" + replicateNum);
             this.useCase.writeFile(this.useCase.randomAA, this.mutagenesis_scheme + "_randomDNA_AA_"  + coverage +
                     "_" + replicateNum);
+
         } else if (this.type.equals("aa")) {
             while (simCoverage < this.coverage) {
                 simCoverage = useCase.calAACoverage();

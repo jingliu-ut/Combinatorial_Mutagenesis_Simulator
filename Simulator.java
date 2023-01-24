@@ -3,7 +3,7 @@ import java.io.IOException;
 
 public class Simulator {
     public static void main(String[] args) throws IOException {
-        int num = 1;
+        int num = 2;
         double coverage = 1;
         String type = "dna"; //"dna" or "aa"
         int replicateNum = 1;
