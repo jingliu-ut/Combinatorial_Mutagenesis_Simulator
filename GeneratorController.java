@@ -1,8 +1,7 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
+
 
 public class GeneratorController implements SystemInOut{
     @Override
@@ -21,27 +20,26 @@ public class GeneratorController implements SystemInOut{
     private final double coverage;
     private final String type;
     private final int replicateNum;
+    private final String mutagenesis_scheme;
 
 
-    public GeneratorController(int num, double coverage, String type, int replicateNum) {
-        this.useCase = new UseCase(num);
+    public GeneratorController(int num, double coverage, String type, int replicateNum, String mutagenesis_scheme) {
+        this.useCase = new UseCase(num, mutagenesis_scheme);
         this.coverage = coverage;
         this.type = type;
         this.replicateNum = replicateNum;
+        this.mutagenesis_scheme = mutagenesis_scheme;
     }
 
     public int generate() throws IOException {
-        sendOutput("Calculating simulator number for " + this.coverage + " percent coverage......");
-        if (type.equals("dna")) {
-            this.useCase.writeFile(this.useCase.uniqueDNA, "uniqueDNA");
-        } else if (this.type.equals("aa")) {
-            this.useCase.writeFile(this.useCase.uniqueAA, "uniqueAA");
-        }
-        int deciNum;
-        int decIndex = String.valueOf(this.coverage).indexOf(".");
-        deciNum = String.valueOf(this.coverage).length() - decIndex - 1;
-        this.useCase.setDeciNum(deciNum);
+        sendOutput("Simulating sampling requirement using " + this.mutagenesis_scheme + "mutagenesis scheme for "
+                + this.coverage + " " + "percent coverage (replicate " + this.replicateNum + ")");
 
+        if (type.equals("dna")) {
+            this.useCase.writeFile(this.useCase.uniqueDNA, "uniqueDNA_" + this.mutagenesis_scheme);
+        } else if (this.type.equals("aa")) {
+            this.useCase.writeFile(this.useCase.uniqueAA, "uniqueAA_"  + this.mutagenesis_scheme);
+        }
 
         int simNum = 0;
         double simCoverage = 0;
@@ -51,25 +49,23 @@ public class GeneratorController implements SystemInOut{
                 simNum += 1;
                 sendOutput(String.valueOf(simNum));
             }
-            this.useCase.writeFile(this.useCase.randomDNA, "randomDNA_" + coverage + "_" + replicateNum);
+            this.useCase.writeFile(this.useCase.randomDNA, this.mutagenesis_scheme + "_randomDNA_DNA_" + coverage +
+                    "_" + replicateNum);
+            this.useCase.writeFile(this.useCase.randomAA, this.mutagenesis_scheme + "_randomDNA_AA_"  + coverage +
+                    "_" + replicateNum);
         } else if (this.type.equals("aa")) {
             while (simCoverage < this.coverage) {
                 simCoverage = useCase.calAACoverage();
                 simNum += 1;
                 sendOutput(String.valueOf(simNum));
             }
-            this.useCase.writeFile(this.useCase.randomAA, "randomAA_"  + coverage + "_" + replicateNum);
+            this.useCase.writeFile(this.useCase.randomAA, this.mutagenesis_scheme + "_randomAA_AA_"  + coverage +
+                    "_" + replicateNum);
+            this.useCase.writeFile(this.useCase.randomDNA, this.mutagenesis_scheme + "_randomAA_DNA_"  + coverage +
+                    "_" + replicateNum);
         }
 
         return simNum;
     }
 
-
-    public static double round(double value, int places) {
-        if (places < 0) throw new IllegalArgumentException();
-
-        BigDecimal bd = new BigDecimal(Double.toString(value));
-        bd = bd.setScale(places, RoundingMode.HALF_UP);
-        return bd.doubleValue();
-    }
 }
