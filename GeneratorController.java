@@ -47,7 +47,6 @@ public class GeneratorController implements SystemInOut{
             while (simCoverage < this.coverage) {
                 simCoverage = useCase.calDNACoverage();
                 simNum += 1;
-                sendOutput(String.valueOf(simNum));
             }
             this.useCase.writeFile(this.useCase.randomDNA, this.mutagenesis_scheme + "_randomDNA_DNA_" + coverage +
                     "_" + replicateNum);
@@ -57,7 +56,6 @@ public class GeneratorController implements SystemInOut{
             while (simCoverage < this.coverage) {
                 simCoverage = useCase.calAACoverage();
                 simNum += 1;
-                sendOutput(String.valueOf(simNum));
             }
             this.useCase.writeFile(this.useCase.randomAA, this.mutagenesis_scheme + "_randomAA_AA_"  + coverage +
                     "_" + replicateNum);
