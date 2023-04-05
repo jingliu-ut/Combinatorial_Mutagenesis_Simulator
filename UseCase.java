@@ -317,6 +317,7 @@ public class UseCase {
         File dir = new File("Outputs");
         File file = new File(dir,name + ".txt");
         String path = file.getAbsolutePath();
+        System.out.print("Out path");
         System.out.print(path);
         FileOutputStream fos = new FileOutputStream(file);
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
