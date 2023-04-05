@@ -313,7 +313,8 @@ public class UseCase {
      * @throws IOException
      */
     public void writeFile(List<String> sequences, String name) throws IOException {
-        File file = new File(".//Outputs//" +name + ".txt");
+        String file_path = "Outpus/" + name + ".txt";
+        File file = new File(file_path);
         FileOutputStream fos = new FileOutputStream(file);
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
 
