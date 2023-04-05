@@ -32,7 +32,7 @@ public class GeneratorController implements SystemInOut{
     }
 
     public int generate() throws IOException {
-        sendOutput("Simulating sampling requirement using " + this.mutagenesis_scheme + "mutagenesis scheme for "
+        sendOutput("Simulating sampling requirement using " + this.mutagenesis_scheme + " mutagenesis scheme for "
                 + this.coverage + " " + "percent coverage (replicate " + this.replicateNum + ")");
 
         if (type.equals("dna")) {
