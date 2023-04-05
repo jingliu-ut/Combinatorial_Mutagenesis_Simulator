@@ -314,7 +314,7 @@ public class UseCase {
      * @throws IOException
      */
     public void writeFile(List<String> sequences, String name) throws IOException {
-        File dir = new File("Outputs/");
+        File dir = new File("Outputs");
         File file = new File(dir,name + ".txt");
         FileOutputStream fos = new FileOutputStream(file);
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
