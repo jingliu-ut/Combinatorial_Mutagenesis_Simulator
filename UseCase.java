@@ -1,4 +1,5 @@
 import java.io.*;
+import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.util.*;
 
@@ -313,7 +314,8 @@ public class UseCase {
      * @throws IOException
      */
     public void writeFile(List<String> sequences, String name) throws IOException {
-        File file = new File("Outputs", name + ".txt");
+        File dir = new File("Outputs/");
+        File file = new File(dir,name + ".txt");
         FileOutputStream fos = new FileOutputStream(file);
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
 

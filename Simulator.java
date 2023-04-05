@@ -12,7 +12,6 @@ public class Simulator {
         int replicateNum = Integer.parseInt(args[4]);
         Path out_dir = Path.of("./Outputs");
         Files.createDirectory(out_dir);
-
         GeneratorController sim = new GeneratorController(num, coverage, type, replicateNum, mutagenesis_scheme);
         sim.generate();
     }
