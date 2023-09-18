@@ -1,4 +1,6 @@
 # Combinatorial_Mutagenesis_Simulator
+[![DOI](https://zenodo.org/badge/624025883.svg)](https://zenodo.org/badge/latestdoi/624025883)
+
 Combinatorial_Mutagenesis_Simulator is a simulator that is used to simulate the sampling requirements for 
 comibnatorial gene variant libraries using user-specified mutagenesis schemes, number of sites to mutate, and 
 percent coverage of all possible sequences in the library.
